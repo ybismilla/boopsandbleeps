@@ -12,18 +12,19 @@ const synth = new Tone.MonoSynth({
 		attack: 0.1
 	}
 });
-
 synth.toDestination();
 
-
-
+let tempo = 120;
+let notes = ["C4", "D4", "E4", "G4", "A4"];
+let arpeggiatorPattern = "randomWalk";
 
 var arpeggiator = new Tone.Pattern(function(time, note){
-    synth.triggerAttackRelease(note, 5);
-}, ["C4", "D4", "E4", "G4", "A4"], "randomOnce");
+    synth.triggerAttackRelease(note, '16n', time);
+}, notes, arpeggiatorPattern);
 
+arpeggiator.playbackRate = 4;
 arpeggiator.start(0);
 
 
-Tone.Transport.bpm.value = 180;
+Tone.Transport.bpm.value = tempo;
 Tone.Transport.start()
